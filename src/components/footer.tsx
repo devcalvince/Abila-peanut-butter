@@ -33,11 +33,31 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/about" className="hover:text-brand-cream transition-colors">About Us</Link></li>
-              <li><Link to="/products" className="hover:text-brand-cream transition-colors">Products</Link></li>
-              <li><Link to="/testimonials" className="hover:text-brand-cream transition-colors">Testimonials</Link></li>
-              <li><Link to="/offers" className="hover:text-brand-cream transition-colors">Current Offers</Link></li>
-              <li><Link to="/contact" className="hover:text-brand-cream transition-colors">Contact Us</Link></li>
+              <li>
+                <Link to="/about" className="hover:text-brand-cream transition-colors">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link to="/products" className="hover:text-brand-cream transition-colors">
+                  Products
+                </Link>
+              </li>
+              <li>
+                <Link to="/testimonials" className="hover:text-brand-cream transition-colors">
+                  Testimonials
+                </Link>
+              </li>
+              <li>
+                <Link to="/offers" className="hover:text-brand-cream transition-colors">
+                  Current Offers
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="hover:text-brand-cream transition-colors">
+                  Contact Us
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -45,8 +65,8 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Our Products</h4>
             <ul className="space-y-2 text-sm">
-              <li>400g Smooth - KSh 300</li>
-              <li>800g Smooth - KSh 600</li>
+              <li>400g Smooth</li>
+              <li>800g Smooth</li>
               <li className="opacity-75">Crunchy (Coming Soon)</li>
               <li className="opacity-75">Honey-Infused (Coming Soon)</li>
               <li className="opacity-75">Chocolate Peanut (Coming Soon)</li>
@@ -58,17 +78,29 @@ const Footer = () => {
             <h4 className="font-semibold mb-4">Stay Connected</h4>
             <div className="flex space-x-3 mb-4">
               <Button variant="secondary" size="sm" asChild>
-                <a href="https://facebook.com/abilapeanutbutter" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://facebook.com/abilapeanutbutter"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Facebook className="w-4 h-4" />
                 </a>
               </Button>
               <Button variant="secondary" size="sm" asChild>
-                <a href="https://instagram.com/abila_nut" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://instagram.com/abila_nut"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Instagram className="w-4 h-4" />
                 </a>
               </Button>
               <Button variant="secondary" size="sm" asChild>
-                <a href="https://wa.me/254700298161" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://wa.me/254700298161"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <MessageCircle className="w-4 h-4" />
                 </a>
               </Button>
@@ -89,10 +121,18 @@ const Footer = () => {
               © 2024 Abila Peanut Butter. All rights reserved. | Reg. No: BN-Y6S97KOD
             </div>
             <div className="flex space-x-4 text-sm">
-              <Link to="/privacy" className="hover:text-brand-cream transition-colors">Privacy Policy</Link>
-              <Link to="/shipping" className="hover:text-brand-cream transition-colors">Shipping Policy</Link>
-              <Link to="/returns" className="hover:text-brand-cream transition-colors">Returns</Link>
-              <Link to="/terms" className="hover:text-brand-cream transition-colors">Terms of Service</Link>
+              <Link to="/privacy-policy" className="hover:text-brand-cream transition-colors">
+                Privacy Policy
+              </Link>
+              <Link to="/shipping-policy" className="hover:text-brand-cream transition-colors">
+                Shipping Policy
+              </Link>
+              <Link to="/returns" className="hover:text-brand-cream transition-colors">
+                Returns
+              </Link>
+              <Link to="/terms-of-service" className="hover:text-brand-cream transition-colors">
+                Terms of Service
+              </Link>
             </div>
           </div>
         </div>

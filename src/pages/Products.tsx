@@ -1,154 +1,138 @@
+import { useState } from "react";
+import HeroSection from "@/components/hero-section";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { ShoppingCart, Clock } from "lucide-react";
+import { Star, Truck, Shield, Heart } from "lucide-react";
 import productJar from "@/assets/product-jar.jpg";
+import OrderModal from "@/components/order-modal";
 
-const Products = () => {
-  const currentProducts = [
-    {
-      id: 1,
-      name: "400g Smooth Peanut Butter",
-      price: 300,
-      description: "Perfect portion for small families or trying our product for the first time.",
-      features: ["100% Natural", "No Preservatives", "Rich in Protein", "Smooth Texture"],
-      inStock: true
-    },
-    {
-      id: 2,
-      name: "800g Smooth Peanut Butter",
-      price: 600,
-      description: "Great value pack for larger families. Save more with our bigger size!",
-      features: ["100% Natural", "No Preservatives", "Rich in Protein", "Smooth Texture", "Best Value"],
-      inStock: true,
-      popular: true
-    }
+const Index = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
+
+  const products = [
+    { id: 1, name: "400g Smooth Peanut Butter", price: 300 },
+    { id: 2, name: "800g Smooth Peanut Butter", price: 600 },
   ];
 
-  const comingSoon = [
-    {
-      name: "400g Crunchy Peanut Butter",
-      description: "For those who love texture in their peanut butter.",
-      estimatedPrice: 320
-    },
-    {
-      name: "400g Honey-Infused Peanut Butter",
-      description: "Natural sweetness meets creamy peanut goodness.",
-      estimatedPrice: 350
-    },
-    {
-      name: "400g Chocolate Peanut Butter",
-      description: "The perfect blend of chocolate and peanut flavors.",
-      estimatedPrice: 380
-    }
-  ];
+  const openModalWithProduct = (id: number) => {
+    setSelectedProductId(id);
+    setIsModalOpen(true);
+  };
 
   return (
-    <div className="py-16">
-      <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold mb-6">Our Products</h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Premium peanut butter made with the finest ingredients, available in sizes perfect for every family.
-          </p>
-        </div>
+    <div>
+      <HeroSection />
 
-        {/* Current Products */}
-        <div className="mb-16">
-          <h2 className="text-2xl font-bold mb-8 text-brand-peanut">Available Now</h2>
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {currentProducts.map((product) => (
-              <Card key={product.id} className={`relative overflow-hidden ${product.popular ? 'border-brand-green' : ''}`}>
-                {product.popular && (
-                  <Badge className="absolute top-4 right-4 bg-brand-green">Most Popular</Badge>
-                )}
-                <CardContent className="p-8">
-                  <div className="text-center mb-6">
-                    <img src={productJar} alt={product.name} className="w-32 h-32 object-contain mx-auto mb-4" />
-                    <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
-                    <p className="text-muted-foreground">{product.description}</p>
-                  </div>
-                  
-                  <div className="mb-6">
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {product.features.map((feature, index) => (
-                        <Badge key={index} variant="secondary" className="text-xs">
-                          {feature}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-brand-peanut mb-4">
-                      KSh {product.price.toLocaleString()}
-                    </div>
-                    <Button 
-                      className="w-full bg-brand-green hover:bg-brand-green/90"
-                      disabled={!product.inStock}
-                    >
-                      <ShoppingCart className="w-4 h-4 mr-2" />
-                      {product.inStock ? 'Add to Cart' : 'Out of Stock'}
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* Coming Soon */}
-        <div className="mb-16">
-          <h2 className="text-2xl font-bold mb-8 text-brand-peanut">Coming Soon</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {comingSoon.map((product, index) => (
-              <Card key={index} className="opacity-75">
-                <CardContent className="p-6">
-                  <div className="text-center">
-                    <Clock className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-                    <h3 className="font-semibold mb-2">{product.name}</h3>
-                    <p className="text-sm text-muted-foreground mb-4">{product.description}</p>
-                    <div className="text-lg font-bold text-brand-peanut mb-4">
-                      Est. KSh {product.estimatedPrice}
-                    </div>
-                    <Button variant="outline" disabled>
-                      Coming Soon
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* Bulk Orders */}
-        <div className="bg-secondary/20 rounded-lg p-8">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold mb-4 text-brand-peanut">Bulk Orders & Future Plans</h2>
-            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              Looking for larger quantities? We're working on family bundles, subscription services, 
-              and expanding to major supermarkets and online platforms.
+      {/* Features Section */}
+      <section className="py-16 bg-gradient-to-b from-background to-secondary/20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Why Choose Abila?</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              We're committed to providing the highest quality peanut butter that nourishes your family.
             </p>
-            <div className="grid md:grid-cols-3 gap-4 text-sm">
-              <div className="p-4 bg-card rounded-lg">
-                <h3 className="font-semibold mb-2">Family Bundles</h3>
-                <p className="text-muted-foreground">3 × 800g jars at discounted prices</p>
-              </div>
-              <div className="p-4 bg-card rounded-lg">
-                <h3 className="font-semibold mb-2">Subscription Service</h3>
-                <p className="text-muted-foreground">Monthly peanut butter delivery</p>
-              </div>
-              <div className="p-4 bg-card rounded-lg">
-                <h3 className="font-semibold mb-2">Retail Expansion</h3>
-                <p className="text-muted-foreground">Jumia, Glovo, Carrefour & more</p>
-              </div>
-            </div>
+          </div>
+
+          <div className="grid md:grid-cols-4 gap-6">
+            <Card>
+              <CardContent className="p-6 text-center">
+                <Heart className="w-12 h-12 text-brand-green mx-auto mb-4" />
+                <h3 className="font-semibold mb-2">100% Natural</h3>
+                <p className="text-sm text-muted-foreground">No artificial preservatives or additives</p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-6 text-center">
+                <Shield className="w-12 h-12 text-brand-peanut mx-auto mb-4" />
+                <h3 className="font-semibold mb-2">Quality Assured</h3>
+                <p className="text-sm text-muted-foreground">Rigorous quality checks at every step</p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-6 text-center">
+                <Truck className="w-12 h-12 text-brand-green mx-auto mb-4" />
+                <h3 className="font-semibold mb-2">Fast Delivery</h3>
+                <p className="text-sm text-muted-foreground">Same-day delivery in Eldoret</p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-6 text-center">
+                <Star className="w-12 h-12 text-yellow-500 mx-auto mb-4" />
+                <h3 className="font-semibold mb-2">Award Winning</h3>
+                <p className="text-sm text-muted-foreground">Best Startup - Eldohub Miliki Program</p>
+              </CardContent>
+            </Card>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* Products Preview */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Our Products</h2>
+            <p className="text-muted-foreground">Premium peanut butter in convenient sizes</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {products.map(product => (
+              <Card key={product.id} className="overflow-hidden">
+                <CardContent className="p-8 text-center">
+                  <img src={productJar} alt={product.name} className="w-32 h-32 object-contain mx-auto mb-6" />
+                  <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
+                  <p className="text-muted-foreground mb-4">
+                    {product.id === 1 ? "Perfect for small families" : "Great value for larger families"}
+                  </p>
+                  <div className="text-2xl font-bold text-brand-peanut mb-4">KSh {product.price}</div>
+                  <Button
+                    className="bg-brand-green hover:bg-brand-green/90"
+                    onClick={() => openModalWithProduct(product.id)}
+                  >
+                    Order Now
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 bg-gradient-to-r from-brand-peanut to-brand-warm text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-4">Ready to Try Abila Peanut Butter?</h2>
+          <p className="text-xl mb-8 opacity-90">Join hundreds of satisfied families across Kenya</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button
+              size="lg"
+              variant="secondary"
+              onClick={() => openModalWithProduct(0)} // 0 will open modal without preselected product
+            >
+              View All Products
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="text-white border-white hover:bg-white hover:text-primary"
+              onClick={() => openModalWithProduct(-1)} // alternative: navigate("/contact") if preferred
+            >
+              Contact Us
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Order Modal */}
+      <OrderModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 };
 
-export default Products;
+export default Index;

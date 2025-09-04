@@ -1,16 +1,27 @@
+import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Star } from "lucide-react";
 import productJar from "@/assets/product-jar.jpg";
 import heroBg from "@/assets/hero-bg.jpg";
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  onShopNow?: () => void;
+}
+
+const HeroSection = ({ onShopNow }: HeroSectionProps) => {
+  const featuresRef = useRef<HTMLDivElement>(null);
+
+  const handleLearnMore = () => {
+    featuresRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <section 
+    <section
       className="relative min-h-[600px] flex items-center"
       style={{
         backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(${heroBg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
       <div className="container mx-auto px-4 py-16">
@@ -25,23 +36,32 @@ const HeroSection = () => {
               </div>
               <span className="text-sm">Trusted by 500+ families in Eldoret</span>
             </div>
-            
+
             <h1 className="text-4xl md:text-6xl font-bold leading-tight">
               Pure Peanut
               <span className="block text-yellow-400">Pleasure</span>
             </h1>
-            
+
             <p className="text-xl text-gray-200 max-w-lg">
-              Nutritious, affordable, and purpose-driven peanut butter that feeds families 
+              Nutritious, affordable, and purpose-driven peanut butter that feeds families
               and promotes reproductive health and wellness.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-brand-green hover:bg-brand-green/90 text-white">
+              <Button
+                size="lg"
+                className="bg-brand-green hover:bg-brand-green/90 text-white"
+                onClick={onShopNow} // Open modal from parent
+              >
                 Shop Now
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
-              <Button variant="outline" size="lg" className="text-white border-white hover:bg-white hover:text-primary">
+              <Button
+                variant="outline"
+                size="lg"
+                className="text-white border-white hover:bg-white hover:text-primary"
+                onClick={handleLearnMore} // Scroll to features
+              >
                 Learn More
               </Button>
             </div>
@@ -66,9 +86,9 @@ const HeroSection = () => {
           <div className="flex justify-center">
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-brand-peanut to-brand-green rounded-full blur-3xl opacity-20 scale-110"></div>
-              <img 
-                src={productJar} 
-                alt="Abila Peanut Butter Jar" 
+              <img
+                src={productJar}
+                alt="Abila Peanut Butter Jar"
                 className="relative z-10 w-80 h-80 object-contain drop-shadow-2xl"
               />
               <div className="absolute -top-4 -right-4 bg-yellow-400 text-primary rounded-full w-20 h-20 flex items-center justify-center font-bold text-sm z-20">
@@ -78,6 +98,9 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
+
+      {/* Hidden anchor for Learn More */}
+      <div ref={featuresRef}></div>
     </section>
   );
 };
