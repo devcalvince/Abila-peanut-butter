@@ -1,73 +1,65 @@
-# Welcome to your Lovable project
+# 🥜 Abila Peanut Butter Website
 
-## Project info
+A modern e-commerce-style website for **Abila Peanut Butter**, built with React, TypeScript, and Tailwind CSS.  
+The site allows users to learn about Abila, browse products, place quick orders, and contact the business directly.
 
-**URL**: https://lovable.dev/projects/98764da3-0755-4b09-8832-8d3fcc367a3f
+---
 
-## How can I edit this code?
+## 🚀 Features
 
-There are several ways of editing your application.
+- **Beautiful landing page** with hero section, product highlights, and calls-to-action.
+- **Product catalog**: Smooth peanut butter jars (400g & 800g), with "coming soon" placeholders for future products.
+- **Quick order modal** with:
+  - Product selection & quantity control.
+  - Automatic price calculation.
+  - Dynamic shipping fee rules (free in Eldoret for orders ≥ KSh 600).
+  - Customer details form and payment method selection.
+- **Contact page** with business hours and WhatsApp quick chat.
+- **Policies pages**: Privacy, Shipping, Returns, and Terms of Service.
+- **Responsive design**: Works across mobile, tablet, and desktop.
+- **SEO & Social Media ready** with Open Graph & Twitter card metadata.
+- **Cart & Toast notifications** for order feedback.
 
-**Use Lovable**
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/98764da3-0755-4b09-8832-8d3fcc367a3f) and start prompting.
+## 🛠️ Tech Stack
 
-Changes made via Lovable will be committed automatically to this repo.
+- **Frontend Framework**: [React](https://react.dev/) + [Vite](https://vitejs.dev/)
+- **Language**: TypeScript
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **UI Components**: [shadcn/ui](https://ui.shadcn.com/)  
+- **Icons**: [lucide-react](https://lucide.dev/)
+- **State & Data**: React Hooks + [TanStack Query](https://tanstack.com/query)
+- **Routing**: [React Router DOM](https://reactrouter.com/)
+- **Notifications**: shadcn Toaster & Sonner
+- **Package Manager**: npm
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 📦 Project Structure
+src/
+│── assets/ # Images & static assets
+│── components/ # Reusable UI components (Hero, Footer, Layout, etc.)
+│── pages/ # Individual pages (Home, Products, Contact, Policies, etc.)
+│── hooks/ # Custom hooks (e.g., toast hook)
+│── App.tsx # Main app routing & providers
+│── main.tsx # Entry point
+public/ # Favicon, social images, static files
+Orders & Contact
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Currently, order details are:
 
-Follow these steps:
+Shown in the console (for development).
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+Displayed as a success toast.
+➡️ Can be extended to send to email or WhatsApp API.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+Contact Options:
 
-# Step 3: Install the necessary dependencies.
-npm i
+📍 Location: Pioneer, Kisumu Road, Eldoret
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+📞 Phone: +254 700 298161
 
-**Edit a file directly in GitHub**
+📧 Email: ochiengsteven2003@gmail.com
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/98764da3-0755-4b09-8832-8d3fcc367a3f) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+💬 WhatsApp: Chat Now

@@ -118,7 +118,7 @@ const Footer = () => {
         <div className="border-t border-primary-foreground/20 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-sm opacity-75">
-              © 2024 Abila Peanut Butter. All rights reserved. | Reg. No: BN-Y6S97KOD
+              © 2024 Autene Softwares and Abila Peanut Butter. All rights reserved. | Reg. No: BN-Y6S97KOD
             </div>
             <div className="flex space-x-4 text-sm">
               <Link to="/privacy-policy" className="hover:text-brand-cream transition-colors">
