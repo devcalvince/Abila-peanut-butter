@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { X, Minus, Plus } from "lucide-react";
@@ -34,10 +33,9 @@ const OrderModal = ({ isOpen, onClose }: OrderModalProps) => {
       items: prev.items
         .map((item) =>
           item.id === id
-            ? { ...item, quantity: Math.max(0, item.quantity + change) }
+            ? { ...item, quantity: Math.max(1, item.quantity + change) } // no zero quantities
             : item
-        )
-        .filter((item) => item.quantity > 0),
+        ),
     }));
   };
 
@@ -71,9 +69,11 @@ const OrderModal = ({ isOpen, onClose }: OrderModalProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Required fields validation
     if (
       !orderData.name ||
-      (!orderData.email && !orderData.phone) ||
+      !orderData.email ||
+      !orderData.phone ||
       !orderData.location ||
       !orderData.paymentMethod
     ) {
@@ -85,25 +85,19 @@ const OrderModal = ({ isOpen, onClose }: OrderModalProps) => {
       return;
     }
 
+    const firstItem = orderData.items[0]; // main product reference
+
     // Send email to Abila Team
     emailjs.send(
       "service_6q5uzb6",
       "template_axvgqu7",
       {
         customer_name: orderData.name,
-        customer_email: orderData.email || "Not provided",
-        customer_phone: orderData.phone || "Not provided",
-        customer_location: orderData.location,
-        order_items: orderData.items
-          .map(
-            (item) =>
-              `${item.quantity}x ${item.name} = KSh ${
-                item.price * item.quantity
-              }`
-          )
-          .join("\n"),
-        subtotal: total,
-        shipping: shippingCost,
+        customer_email: orderData.email,
+        customer_phone: orderData.phone,
+        delivery_address: orderData.location,
+        product_name: firstItem.name,
+        quantity: firstItem.quantity,
         total: grandTotal,
       },
       "slChlzaZfELZjM0lT"
@@ -114,18 +108,9 @@ const OrderModal = ({ isOpen, onClose }: OrderModalProps) => {
       "service_6q5uzb6",
       "template_nswzzma",
       {
-        to_email: orderData.email || "Not provided",
-        to_name: orderData.name,
-        order_items: orderData.items
-          .map(
-            (item) =>
-              `${item.quantity}x ${item.name} = KSh ${
-                item.price * item.quantity
-              }`
-          )
-          .join("\n"),
-        subtotal: total,
-        shipping: shippingCost,
+        customer_name: orderData.name,
+        product_name: firstItem.name,
+        quantity: firstItem.quantity,
         total: grandTotal,
       },
       "slChlzaZfELZjM0lT"
@@ -241,7 +226,7 @@ const OrderModal = ({ isOpen, onClose }: OrderModalProps) => {
               />
             </div>
             <div>
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">Email *</Label>
               <Input
                 id="email"
                 type="email"
@@ -249,10 +234,11 @@ const OrderModal = ({ isOpen, onClose }: OrderModalProps) => {
                 onChange={(e) =>
                   setOrderData((prev) => ({ ...prev, email: e.target.value }))
                 }
+                required
               />
             </div>
             <div>
-              <Label htmlFor="phone">Phone Number</Label>
+              <Label htmlFor="phone">Phone Number *</Label>
               <Input
                 id="phone"
                 value={orderData.phone}
@@ -260,6 +246,7 @@ const OrderModal = ({ isOpen, onClose }: OrderModalProps) => {
                   setOrderData((prev) => ({ ...prev, phone: e.target.value }))
                 }
                 placeholder="+254..."
+                required
               />
             </div>
             <div>
@@ -287,6 +274,7 @@ const OrderModal = ({ isOpen, onClose }: OrderModalProps) => {
               onValueChange={(value) =>
                 setOrderData((prev) => ({ ...prev, paymentMethod: value }))
               }
+              required
             >
               <SelectTrigger>
                 <SelectValue placeholder="Choose payment method" />
